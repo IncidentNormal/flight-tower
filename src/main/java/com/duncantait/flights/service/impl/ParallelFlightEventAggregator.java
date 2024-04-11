@@ -50,20 +50,11 @@ public class ParallelFlightEventAggregator implements FlightEventAggregator {
 
                     // Reduce the processed events to a FlightState, ensuring sequential processing
                     return processedEvents.values().stream()
-                            .reduce(initialFlightState(planeID),
-                                    (state, event) -> FlightStateFactory.createFlightState(event, state),
+                            .reduce(FlightStateFactory.initialState(planeID),
+                                    (state, event) -> FlightStateFactory.update(event, state),
                                     (agg1, agg2) -> agg2); // This combiner is effectively unused in sequential stream
                 })
                 .collect(Collectors.toList());
 
-    }
-
-    private static FlightState initialFlightState(String planeID) {
-        return FlightState.builder()
-                .planeID(planeID)
-                .lastTimestamp(LocalDateTime.MIN)
-                .status(FlightStatus.UNKNOWN)
-                .lastFuelLevel(0)
-                .build();
     }
 }

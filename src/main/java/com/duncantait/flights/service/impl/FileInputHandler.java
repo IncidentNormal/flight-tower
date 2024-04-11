@@ -14,12 +14,11 @@ import java.nio.file.Paths;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-// TODO sort out AutoCloseable stuff here -- perhaps the caller needs to do a try with resources
 @Slf4j
 public class FileInputHandler implements InputHandler {
 
     @Override
-    public Stream<FlightEvent> process(String[] args, Consumer<Stream<FlightEvent>> consumer) {
+    public void process(String[] args, Consumer<Stream<FlightEvent>> consumer) {
 
         String filePath = args[1];
 

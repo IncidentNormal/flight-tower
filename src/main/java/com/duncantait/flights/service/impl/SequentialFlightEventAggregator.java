@@ -3,7 +3,6 @@ package com.duncantait.flights.service.impl;
 import com.duncantait.flights.factory.FlightStateFactory;
 import com.duncantait.flights.model.FlightEvent;
 import com.duncantait.flights.model.FlightState;
-import com.duncantait.flights.model.FlightStatus;
 import com.duncantait.flights.service.FlightEventAggregator;
 
 import java.time.LocalDateTime;
@@ -46,19 +45,11 @@ public class SequentialFlightEventAggregator implements FlightEventAggregator {
 
                     return planeEvents.entrySet().stream()
                             .reduce(
-                                    initialFlightState(planeID),
-                                    (FlightState state, Map.Entry<LocalDateTime, FlightEvent> eventEntry) -> FlightStateFactory.createFlightState(eventEntry.getValue(), state),
+                                    FlightStateFactory.initialState(planeID),
+                                    (FlightState state, Map.Entry<LocalDateTime, FlightEvent> eventEntry) -> FlightStateFactory.update(eventEntry.getValue(), state),
                                     (agg1, agg2) -> agg2);
                 })
                 .toList();
     }
 
-    private static FlightState initialFlightState(String planeID) {
-        return FlightState.builder()
-                .planeID(planeID)
-                .lastTimestamp(LocalDateTime.MIN)
-                .status(FlightStatus.UNKNOWN)
-                .lastFuelLevel(0)
-                .build();
-    }
 }
