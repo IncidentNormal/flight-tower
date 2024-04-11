@@ -7,9 +7,11 @@ import com.duncantait.flights.service.InputHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 // TODO sort out AutoCloseable stuff here -- perhaps the caller needs to do a try with resources
@@ -17,25 +19,23 @@ import java.util.stream.Stream;
 public class FileInputHandler implements InputHandler {
 
     @Override
-    public Stream<FlightEvent> getFlightEvents(String[] args) {
+    public Stream<FlightEvent> processFlightEvents(String[] args, Consumer<Stream<FlightEvent>> consumer) {
 
         String filePath = args[1];
 
         // Check if file exists
-        if (!Files.exists(Paths.get(filePath))) {
+        Path path = Paths.get(filePath);
+        if (!Files.exists(path)) {
             throw new RuntimeException("File not found: " + filePath);
         }
 
-        Path path = Paths.get(filePath);
-        try {
-            // Return a Stream<FlightEvent>
-            return Files.lines(path)
-                    .map(this::parseLineToEvent);
+        // Open the stream and process it within a try-with-resources block
+        try (Stream<String> lines = Files.lines(path)) {
+            Stream<FlightEvent> flightEvents = lines.map(this::parseLineToEvent);
+            consumer.accept(flightEvents);
         } catch (IOException e) {
-            e.printStackTrace();
-            // In case of an IOException, return an empty Stream.
-            // Consider better exception handling depending on your use case.
-            return Stream.empty();
+            log.error("Error reading file: {}", filePath, e);
+            throw new UncheckedIOException(e);
         }
     }
 

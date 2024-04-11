@@ -1,7 +1,6 @@
 package com.duncantait.flights;
 
 import com.duncantait.flights.helper.LocalDateTimeHelper;
-import com.duncantait.flights.model.FlightEvent;
 import com.duncantait.flights.model.FlightState;
 import com.duncantait.flights.service.FlightEventAggregator;
 import com.duncantait.flights.service.InputHandler;
@@ -12,7 +11,6 @@ import com.duncantait.flights.service.impl.SequentialFlightEventAggregator;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Flights {
 
@@ -29,8 +27,9 @@ public class Flights {
         OutputHandler logOutputHandler = new LogOutputHandler();
 
         // Run code
-        Stream<FlightEvent> flightEvents = fileInputHandler.getFlightEvents(args);
-        List<FlightState> states = flightEventAggregator.aggregateEvents(flightEvents, queryTimestamp);
-        logOutputHandler.write(states);
+        fileInputHandler.processFlightEvents(args, flightEvents -> {
+            List<FlightState> states = flightEventAggregator.aggregateEvents(flightEvents, queryTimestamp);
+            logOutputHandler.write(states);
+        });
     }
 }
