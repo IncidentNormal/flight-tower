@@ -15,7 +15,7 @@ public class LogOutputHandler implements OutputHandler {
     }
 
     private static String toLogLine(FlightState state) {
-        return "%s %s %d".formatted(state.getPlaneID(), state.getStatus(), state.getLastFuelLevel());
+        return "%s %s %d".formatted(state.getPlaneID(), state.getStatus().getVariant(), state.getLastFuelLevel());
     }
 
 }

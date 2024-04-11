@@ -6,6 +6,7 @@ import com.duncantait.flights.model.FlightState;
 import com.duncantait.flights.service.FlightEventAggregator;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class SequentialFlightEventAggregator implements FlightEventAggregator {
                                     (FlightState state, Map.Entry<LocalDateTime, FlightEvent> eventEntry) -> FlightStateFactory.update(eventEntry.getValue(), state),
                                     (agg1, agg2) -> agg2);
                 })
+                .sorted(Comparator.comparing(FlightState::getPlaneID))
                 .toList();
     }
 

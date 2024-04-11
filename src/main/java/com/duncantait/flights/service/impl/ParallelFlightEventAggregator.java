@@ -54,6 +54,7 @@ public class ParallelFlightEventAggregator implements FlightEventAggregator {
                                     (state, event) -> FlightStateFactory.update(event, state),
                                     (agg1, agg2) -> agg2); // This combiner is effectively unused in sequential stream
                 })
+                .sorted(Comparator.comparing(FlightState::getPlaneID))
                 .collect(Collectors.toList());
 
     }

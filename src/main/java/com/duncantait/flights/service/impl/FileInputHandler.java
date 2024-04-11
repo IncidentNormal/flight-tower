@@ -43,7 +43,6 @@ public class FileInputHandler implements InputHandler {
         String[] parts = line.split(" ");
 
         if (parts.length == 2) {
-            log.info("Cancelling flight: {}", parts[0]);
             return FlightEvent.builder()
                     .isCancel(true)
                     .planeID(parts[0])

@@ -9,7 +9,7 @@ public class FlightStatusMapper {
         switch (eventType) {
             case TAKEOFF:
                 return FlightStatus.IN_FLIGHT;
-            case LANDING:
+            case LAND:
                 return FlightStatus.LANDED;
             case REFUEL:
                 return FlightStatus.AWAITING_TAKEOFF;

@@ -5,6 +5,7 @@
    - Unit tests (per component)
    - E2E (component test) with file etc
    - Manual test (from CLI)
+   - Try and think of some more edge cases to test
   - Build / run instructions -- maven etc
 
 ## Running instructions
