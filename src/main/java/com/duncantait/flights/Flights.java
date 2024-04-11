@@ -22,14 +22,14 @@ public class Flights {
         LocalDateTime queryTimestamp = LocalDateTimeHelper.toLocalDateTime(args[0]);
 
         // Instantiate the necessary concrete classes (forgoing Spring / DI for simplicity)
-        InputHandler fileInputHandler = new FileInputHandler();
+        InputHandler inputHandler = new FileInputHandler();
         FlightEventAggregator flightEventAggregator = new SequentialFlightEventAggregator();
-        OutputHandler logOutputHandler = new LogOutputHandler();
+        OutputHandler outputHandler = new LogOutputHandler();
 
         // Run code
-        fileInputHandler.processFlightEvents(args, flightEvents -> {
-            List<FlightState> states = flightEventAggregator.aggregateEvents(flightEvents, queryTimestamp);
-            logOutputHandler.write(states);
+        inputHandler.process(args, flightEvents -> {
+            List<FlightState> states = flightEventAggregator.aggregate(flightEvents, queryTimestamp);
+            outputHandler.handle(states);
         });
     }
 }

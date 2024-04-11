@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class FileInputHandler implements InputHandler {
 
     @Override
-    public Stream<FlightEvent> processFlightEvents(String[] args, Consumer<Stream<FlightEvent>> consumer) {
+    public Stream<FlightEvent> process(String[] args, Consumer<Stream<FlightEvent>> consumer) {
 
         String filePath = args[1];
 

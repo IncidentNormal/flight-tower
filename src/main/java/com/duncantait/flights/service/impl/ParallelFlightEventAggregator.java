@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 public class ParallelFlightEventAggregator implements FlightEventAggregator {
 
-    public List<FlightState> aggregateEvents(Stream<FlightEvent> events, LocalDateTime queryTimestamp) {
+    public List<FlightState> aggregate(Stream<FlightEvent> events, LocalDateTime queryTimestamp) {
 
 
         ConcurrentMap<String, List<FlightEvent>> groupedEvents = events

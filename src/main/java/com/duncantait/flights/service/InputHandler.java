@@ -7,5 +7,5 @@ import java.util.stream.Stream;
 
 public interface InputHandler {
 
-    Stream<FlightEvent> processFlightEvents(String[] arguments, Consumer<Stream<FlightEvent>> consumer);
+    Stream<FlightEvent> process(String[] arguments, Consumer<Stream<FlightEvent>> consumer);
 }

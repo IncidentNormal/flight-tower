@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 // TODO check the other 2 versions of the aggregator, but be aware they might be incorrect
 public class SequentialFlightEventAggregator implements FlightEventAggregator {
 
-    @Override public List<FlightState> aggregateEvents(Stream<FlightEvent> events, LocalDateTime queryTimestamp) {
+    @Override public List<FlightState> aggregate(Stream<FlightEvent> events, LocalDateTime queryTimestamp) {
 
         // Partition events by PlaneID, and then by timestamp
         Map<String, TreeMap<LocalDateTime, FlightEvent>> processedEvents = new HashMap<>();

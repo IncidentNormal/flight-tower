@@ -10,7 +10,7 @@ import java.util.List;
 public class LogOutputHandler implements OutputHandler {
 
     @Override
-    public void write(List<FlightState> states) {
+    public void handle(List<FlightState> states) {
         states.forEach(state -> log.info(toLogLine(state)));
     }
 
