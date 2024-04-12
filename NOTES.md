@@ -1,16 +1,4 @@
-# flight-tower
-
-## TODO
- - Tests
-   - Unit tests (per component)
-   - E2E (component test) with file etc
-   - Manual test (from CLI)
-   - Try and think of some more edge cases to test
-  - Build / run instructions -- maven etc
-
-## Running instructions
-
-- TODO
+# flight-tower/Flights
 
 ## Problem Notes
 
@@ -91,7 +79,7 @@ Decision
 
 - The events, which we are choosing to store in, and consume from, a file, are really the equivalent of a database.
     - If we consider this to be the case, then the fact that we are receiving data for _all_ flights and returning output for _all_ flights is really just a quirk of the use-case. If it were a database then we could easily return data for a subset of Flights and then only return output for these Flights too.
-    - For arguments sake you could use sqlite here, but for simplicity I will leave it as a flat file.
+    - For argument's sake you could use sqlite here, but for simplicity I will leave it as a flat file.
 
 
 Implicit requirements
