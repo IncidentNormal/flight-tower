@@ -8,5 +8,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public interface FlightEventAggregator {
+
     List<FlightState> aggregate(Stream<FlightEvent> events, LocalDateTime queryTimestamp);
 }

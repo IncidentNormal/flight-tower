@@ -28,7 +28,6 @@ public class FileInputHandler implements InputHandler {
             throw new RuntimeException("File not found: " + filePath);
         }
 
-        // Open the stream and process it within a try-with-resources block
         try (Stream<String> lines = Files.lines(path)) {
             Stream<FlightEvent> flightEvents = lines.map(this::parseLineToEvent);
             consumer.accept(flightEvents);
@@ -39,7 +38,6 @@ public class FileInputHandler implements InputHandler {
     }
 
     private FlightEvent parseLineToEvent(String line) {
-        // Assuming the line format is consistent with the provided example
         String[] parts = line.split(" ");
 
         if (parts.length == 2) {
@@ -50,7 +48,6 @@ public class FileInputHandler implements InputHandler {
                     .build();
         }
 
-        // Simple error handling for malformed lines
         if (parts.length != 7) {
             throw new IllegalArgumentException("Malformed line: " + line);
         }

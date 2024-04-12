@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-// TODO check the other 2 versions of the aggregator, but be aware they might be incorrect
 public class SequentialFlightEventAggregator implements FlightEventAggregator {
 
     @Override public List<FlightState> aggregate(Stream<FlightEvent> events, LocalDateTime queryTimestamp) {

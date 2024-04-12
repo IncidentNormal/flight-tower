@@ -6,16 +6,11 @@ import com.duncantait.flights.model.FlightStatus;
 public class FlightStatusMapper {
 
     public static FlightStatus map(FlightEventType eventType) {
-        switch (eventType) {
-            case TAKEOFF:
-                return FlightStatus.IN_FLIGHT;
-            case LAND:
-                return FlightStatus.LANDED;
-            case REFUEL:
-                return FlightStatus.AWAITING_TAKEOFF;
-            default:
-                throw new IllegalArgumentException("Invalid event type: " + eventType);
-        }
+        return switch (eventType) {
+            case TAKEOFF -> FlightStatus.IN_FLIGHT;
+            case LAND -> FlightStatus.LANDED;
+            case REFUEL -> FlightStatus.AWAITING_TAKEOFF;
+        };
     }
 
 }

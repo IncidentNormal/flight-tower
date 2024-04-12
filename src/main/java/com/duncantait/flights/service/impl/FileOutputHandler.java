@@ -32,7 +32,7 @@ public class FileOutputHandler implements OutputHandler {
     }
 
     private static String toLogLine(FlightState state) {
-        return "%s %s %d".formatted(state.getPlaneID(), state.getStatus().getVariant(), state.getLastFuelLevel());
+        return "%s %s %d".formatted(state.getPlaneID(), state.getStatus().getValue(), state.getLastFuelLevel());
     }
 
 }

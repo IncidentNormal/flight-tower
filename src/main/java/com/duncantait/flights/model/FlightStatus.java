@@ -11,10 +11,10 @@ public enum FlightStatus {
     UNKNOWN("Unknown")
     ;
 
-    private final String variant;
+    private final String value;
 
 
-    FlightStatus(String variant) {
-        this.variant = variant;
+    FlightStatus(String value) {
+        this.value = value;
     }
 }

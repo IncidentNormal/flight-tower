@@ -12,15 +12,15 @@ public enum FlightEventType {
     REFUEL("Re-Fuel"),
     ;
 
-    private final String variant;
+    private final String value;
 
     FlightEventType(String s) {
-        variant = s;
+        value = s;
     }
 
     public static FlightEventType fromString(String eventType) {
         return Arrays.stream(values())
-                .filter(value -> value.name().equalsIgnoreCase(eventType) || value.getVariant().equalsIgnoreCase(eventType))
+                .filter(value -> value.name().equalsIgnoreCase(eventType) || value.getValue().equalsIgnoreCase(eventType))
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("Invalid event type: " + eventType));
     }
 }
